@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,7 @@ namespace Simple.SinjulMSBH
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }
-		public List PullRequests { get; set; }
+		public List<PullRequest> PullRequests { get; set; }
 	}
 
 
