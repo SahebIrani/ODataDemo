@@ -22,6 +22,21 @@ namespace Simple.SinjulMSBH
 				edmBuilder.EntitySet<Student>("Students");
 
 				_edmModel = edmBuilder.GetEdmModel();
+
+
+				ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+				builder.EntitySet<Project>("Projects");
+				builder.EntitySet<Contributor>("Contributors");
+				builder.EntitySet<PullRequest>("PullRequests");
+
+				FunctionConfiguration pullRequestsByProjectByContributor =
+					builder.EntityType<Project>().Collection
+						.Function("ByProjectByContributor")
+						.ReturnsCollectionFromEntitySet<Project>("Projects");
+				pullRequestsByProjectByContributor.Parameter<int>("projectId").Required();
+				pullRequestsByProjectByContributor.Parameter<int>("contributorId").Required();
+
+				return builder.GetEdmModel();
 			}
 
 			return _edmModel;

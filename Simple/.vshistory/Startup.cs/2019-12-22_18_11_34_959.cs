@@ -28,10 +28,8 @@ namespace Simple
 			app.UseMvc(configureRoutes: routeBuilder =>
 			{
 				routeBuilder.Select().Expand().Filter().OrderBy().MaxTop(85).Count();
-				routeBuilder.MapODataServiceRoute("odata", "odata", EdmModelBuilder.GetEdmModel());
 
-				routeBuilder.Select().Filter().OrderBy().Expand().Count().MaxTop(50);
-				routeBuilder.MapODataServiceRoute("api", "api", EdmModelBuilder.GetEdmModel());
+				routeBuilder.MapODataServiceRoute("odata", "odata", EdmModelBuilder.GetEdmModel());
 
 				routeBuilder.EnableDependencyInjection();
 			});

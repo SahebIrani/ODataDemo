@@ -5,6 +5,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Simple.SinjulMSBH
 {
+	public class PullRequest
+	{
+		public int Id { get; set; }
+		public string Title { get; set; }
+
+		public int ProjectId { get; set; }
+		public int ContributorId { get; set; }
+
+		public Project Project { get; set; }
+		public Contributor Contributor { get; set; }
+	}
+
+	public class Contributor
+	{
+
+	}
+
+	public class Project
+	{
+		public int Id { get; set; }
+		public string Title { get; set; }
+		public List PullRequests { get; set; }
+	}
+
+
 	public class Customer
 	{
 		public int Id { get; set; }

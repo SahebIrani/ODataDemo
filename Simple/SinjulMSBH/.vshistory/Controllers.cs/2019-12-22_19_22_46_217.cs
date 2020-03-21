@@ -2,54 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.AspNet.OData;
-using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Simple.SinjulMSBH
 {
-
-	//? OData API Multiple Parameters
-	//? https://wellsb.com/csharp/aspnet/odata-api-multiple-parameters
-	public class ProjectsController : Controller
-	{
-		//? GET api/projects(1)?$expand=PullRequests&$filter=PullRequests/ContributorId eq 5
-		[EnableQuery]
-		[ODataRoute("({id})")]
-		public async Task GetProject([FromODataUri] int id)
-		{
-			//var project = await _context.Projects.Where(s => s.Id == id)
-			//	.Include(s => s.PullRequests)
-			//	.FirstOrDefaultAsync();
-		}
-
-		//? GET: api/pullrequests/ByProjectByContributor(projectId=1,contributorId=5)
-		//? GET: api/pullrequests/ByProjectByContributor(projectId=1,contributorId=5)
-		[ODataRoute("ByProjectByContributor(projectId={projectId},contributorId={contributorId})")]
-		public IQueryable<PullRequest> ByProjectByContributor([FromODataUri] int projectId, [FromODataUri] int contributorId)
-		{
-			//var pullRequests = _context.PullRequests.Where(
-			//	pr => pr.ProjectId == projectId
-			//	&& pr.ContributorId == contributorId);
-			return default;
-		}
-	}
-
-
-	// https://wellsb.com/csharp/aspnet/odata-api-ef-core-blazor/
-	[ODataRoutePrefix("contacts")]
 	[Route("api/[controller]"), ApiController]
 	public class StudentsController : ControllerBase
 	{
-		[HttpGet, EnableQuery(PageSize = 85), ODataRoute]
-		[ODataRoute("({id})")]
+		[HttpGet, EnableQuery()]
 		public ActionResult<IEnumerable<Student>> Get()
 		{
-			//var response = await _httpClient.GetAsync($”api / contacts ?$count = true &$orderby ={ orderBy}
-			//&$skip ={ skip}
-			//&$top ={ top}”);
-
 			return new List<Student>
 			{
 				CreateNewStudent("Sinjul MSBH", 850),
